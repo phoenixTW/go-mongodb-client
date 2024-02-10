@@ -1,4 +1,4 @@
-package mongodb
+package mongostorage
 
 import (
 	"context"
@@ -18,8 +18,8 @@ type RetryingStorage struct {
 	logger   *zap.Logger
 }
 
-// NewRetryingStorage creates new storage with retries
-func NewRetryingStorage(upstream StorageReaderWriter, logger *zap.Logger) *RetryingStorage {
+// NewRetry creates new mongostorage with retries
+func NewRetry(upstream StorageReaderWriter, logger *zap.Logger) *RetryingStorage {
 	return &RetryingStorage{upstream: upstream, logger: logger}
 }
 

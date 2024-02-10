@@ -1,4 +1,4 @@
-package mongodb
+package mongostorage
 
 import (
 	"context"
@@ -13,7 +13,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-// StorageReader describes interface for read operations for storage
+// StorageReader describes interface for read operations for mongostorage
 type StorageReader interface {
 	FindOne(ctx context.Context, collection string, filter interface{}, dest interface{}) (err error)
 	FindAll(ctx context.Context, collection string, filter interface{}, dest interface{}) (err error)
@@ -27,7 +27,7 @@ type StorageReader interface {
 	) (total uint64, err error)
 }
 
-// StorageWriter describes interface for write operations for storage
+// StorageWriter describes interface for write operations for mongostorage
 type StorageWriter interface {
 	RunInTransaction(ctx context.Context, fn func(context.Context) error) error
 	Insert(ctx context.Context, collection string, document interface{}) error
@@ -37,7 +37,7 @@ type StorageWriter interface {
 	DeleteMany(ctx context.Context, collection string, filter interface{}) (deletedCount int64, err error)
 }
 
-// StorageReaderWriter describes interface for both read and write operations for storage
+// StorageReaderWriter describes interface for both read and write operations for mongostorage
 type StorageReaderWriter interface {
 	StorageReader
 	StorageWriter
@@ -63,8 +63,8 @@ func (s *Storage) GetDatabaseName() string {
 	return s.database.Name()
 }
 
-// MakeStorage initializes database storage.
-func MakeStorage(db *mongo.Database) StorageReaderWriter {
+// New initializes database mongostorage.
+func New(db *mongo.Database) StorageReaderWriter {
 	return &Storage{database: db}
 }
 

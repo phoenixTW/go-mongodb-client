@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/phoenixTW/go-mongodb-client/mongostorage"
 	"os"
 
 	"github.com/stretchr/testify/suite"
@@ -24,7 +25,7 @@ type TestDBSuite struct {
 // TestDB defines db client and data access layers.
 type TestDB struct {
 	MongoClient *mongo.Client
-	Database    StorageReaderWriter
+	Database    mongostorage.StorageReaderWriter
 }
 
 // GetMongoDSN returns DSN to connect to MongoDB
@@ -77,7 +78,7 @@ func NewTestDatabase(dsn, dbName string) (TestDB, error) {
 
 	return TestDB{
 		MongoClient: client,
-		Database:    MakeStorage(client.Database(dbName)),
+		Database:    mongostorage.MakeStorage(client.Database(dbName)),
 	}, nil
 }
 
