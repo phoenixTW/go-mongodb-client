@@ -29,7 +29,7 @@ jobs:
           patch_regex: "^fix/.+"
           minor_regex: "^feat/.+"
           major_regex: "^major/.+"
-          hotfix_regex: "^hotfix/.+"
+          hotfix_pattern: "^hotfix/.+"
 
       - name: Bump version and push tag
         id: tag_version
