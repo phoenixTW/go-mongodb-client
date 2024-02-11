@@ -78,7 +78,7 @@ func NewTestDatabase(dsn, dbName string) (TestDB, error) {
 
 	return TestDB{
 		MongoClient: client,
-		Database:    mongostorage.MakeStorage(client.Database(dbName)),
+		Database:    mongostorage.New(client.Database(dbName)),
 	}, nil
 }
 
